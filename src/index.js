@@ -1,31 +1,37 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-class Inc extends React.Component{
-
+function Message(props){
+  if(props.value){
+   return <h1>This is the first message</h1>
+  }
+  return <h1>This is the Second message</h1>
+}
+class Btn extends React.Component{
   constructor(props){
     super(props);
-    this.state = {counter : 0}
+    this.state = {value:true}
   }
 
-increment = (e) => {
-  e.preventDefault();
-  this.setState({
-    counter : this.state.counter + 1 
-  });
-}
+  handleClcik = () =>{
+    this.setState({
+      value : !this.state.value
+    });
+  }
 
-render(){
-
-    return <button onClick = {this.increment}>
-                value is {this.state.counter}
-            </button>
- }
+  render(){
+    return(
+      <div>
+        <button onClick={this.handleClcik}>Change the message</button>
+        <Message value={this.state.value}/>
+      </div>
+    );
+  }
 }
 
 ReactDom.render(
 
-  <Inc />,
+  <Btn />,
   document.getElementById('root')
 
 );
